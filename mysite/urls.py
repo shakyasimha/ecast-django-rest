@@ -17,11 +17,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from book.views import ListBook, CreateBook 
+from book.views import list_book, create_book, retrieve_book_entry, update_book_entry, delete_book_entry
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include('rest_framework.urls')),
-    path('books/', ListBook.as_view(), name='book-list'),
-    path('books/create', CreateBook.as_view(), name='book-create'),
+    path('books/', list_book, name='book-list'),
+    path('books/create', create_book, name='book-create'),
+    path('books/<int:pk>', retrieve_book_entry, name='book-retrieve'),
+    path('books/<int:pk>', update_book_entry, name='book-update'),
+    path('books/<int:pk>', delete_book_entry, name='book-delete'),
 ]
